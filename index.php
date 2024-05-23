@@ -30,7 +30,7 @@ $contatos = $contatoDAO->getAll();
                             <h5 class="card-title"><?php echo $contato->nome(); ?></h5>
                             <p class="card-text"><?php echo $contato->telefone(); ?></p>
                             <p class="card-text"><?php echo $contato->email(); ?></p>
-                            <a href="detalhes.html" class="btn btn-primary">Detalhes</a>
+                            <a href="detalhes.php" class="btn btn-primary">Detalhes</a>
                         </div>
                     </div>
                 </div>
