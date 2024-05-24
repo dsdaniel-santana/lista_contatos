@@ -16,13 +16,13 @@ class Contato {
   public function id(){
     return $this->id;
   }
-  public function nome(){
+  public function getNome(){
     return $this->nome;
   }
-  public function telefone(){
+  public function getTelefone(){
     return $this->telefone;
   }
-  public function email(){
+  public function getEmail(){
     return $this->email;
   }
   

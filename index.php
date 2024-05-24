@@ -27,9 +27,9 @@ $contatos = $contatoDAO->getAll();
                 <div class="col">
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="card-title"><?php echo $contato->nome(); ?></h5>
-                            <p class="card-text"><?php echo $contato->telefone(); ?></p>
-                            <p class="card-text"><?php echo $contato->email(); ?></p>
+                            <h5 class="card-title"><?php echo $contato->getNome(); ?></h5>
+                            <p class="card-text"><?php echo $contato->getTelefone(); ?></p>
+                            <p class="card-text"><?php echo $contato->getEmail(); ?></p>
                             <a href="detalhes.php" class="btn btn-primary">Detalhes</a>
                         </div>
                     </div>
