@@ -48,6 +48,29 @@ class ContatoDAO {
             return false;
         }
     }
+
+    public function update($contato){
+        try{
+            $sql ="UPDATE contatos_info SET nome = :nome, telefone = :telefone, email = :email WHERE id = :id";
+            $stmt = $this->db->preapre($sql);
+
+            $id = $contato->getId();
+            $nome = $contato->getNome();
+            $telefone = $contato->getTelefone();
+            $email = $contato->getEmail();
+
+            $stmt->bindParm(':id',$id);
+            $stmt->bindParm(':nome',$nome);
+            $stmt->bindParm(':telefone',$telefone);
+            $stmt->bindParm(':email',$email);
+
+            $stmt->execute();
+
+            return true;
+        }catch (PDOException $e) {
+            return false;
+        }
+    }
 }
 
 ?>
