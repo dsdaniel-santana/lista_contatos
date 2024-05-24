@@ -13,7 +13,7 @@ class Contato {
     $this->email = $email;
   }
 
-  public function id(){
+  public function getId(){
     return $this->id;
   }
   public function getNome(){
