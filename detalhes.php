@@ -1,15 +1,31 @@
 <?php
-require_once'Contato.php';
-require_once'ContatoDAO.php';
+require_once 'Contato.php';
+require_once 'ContatoDAO.php';
 
-$contatoDAO = new ContatoDao();
+$contatoDAO = new ContatoDAO();
 $contato = null;
 
-if($_SERVER['REQUEST_METHOD'] === 'POST'){
-    echo "Chamou o post";
-    if(isset ($_POST['save'])){
-        $novoContato = new Contato(null, $_POST['nome'], $_POST['telefone'], $_POST['email']);
-        $contatoDAO->create($novoContato);
+if($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['id'])) {
+    $contato  = $contatoDAO->getById($_GET['id']);
+}
+
+if($_SERVER['REQUEST_METHOD'] === 'POST') {    
+    if(isset($_POST['save'])) {
+        if (isset($_POST['id']) && !empty($_POST['id'])) {
+            $contato  = $contatoDAO->getById($_POST['id']);
+
+            $contato->setNome($_POST['nome']);
+            $contato->setTelefone($_POST['telefone']);
+            $contato->setEmail($_POST['email']);
+
+            $contatoDAO->update($contato);
+        } else {
+            $novoContato = new Contato(null, $_POST['nome'], $_POST['telefone'], $_POST['email']);
+            $contatoDAO->create($novoContato);            
+        }
+
+        header('Location: index.php');
+        exit;
     }
 }
 ?>
@@ -28,20 +44,20 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
     <div class="container">
         <h1 class="my-4">Detalhes do Contato</h1>
         <form action="detalhes.php" method="POST">
-            <input type="hidden" name="id" value="<?php echo $contato ? $contato->getId : '' ?>">
+            <input type="hidden" name="id" value="<?php echo $contato ? $contato->getId() : ''  ?>">
             <div class="card">
                 <div class="card-body">
                     <div class="form-group">
                         <label for="nome">Nome</label>
-                        <input type="text" class="form-control" id="nome" name="nome" value="<?php echo $contato ? $contato->getNome : '' ?>" required>
+                        <input type="text" class="form-control" id="nome" name="nome" value="<?php echo $contato ? $contato->getNome() : ''  ?>" required>
                     </div>
                     <div class="form-group">
                         <label for="telefone">Telefone</label>
-                        <input type="text" class="form-control" id="telefone" name="telefone" value="<?php echo $contato ? $contato->getTelefone : '' ?>">
+                        <input type="text" class="form-control" id="telefone" name="telefone" value="<?php echo $contato ? $contato->getTelefone() : ''  ?>">
                     </div>
                     <div class="form-group">
                         <label for="email">Email</label>
-                        <input type="email" class="form-control" id="email" name="email" value="<?php echo $contato ? $contato->getEmail : '' ?>" required>
+                        <input type="email" class="form-control" id="email" name="email" value="<?php echo $contato ? $contato->getEmail() : ''  ?>" required>
                     </div>
                     <button type="submit" name="save" class="btn btn-success">Salvar</button>
 
