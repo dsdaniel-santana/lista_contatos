@@ -27,6 +27,27 @@ class ContatoDAO {
         }
     }
 
+    public function deleteById($id){
+        try{
+            $sql = "DELETE FROM contatos_info WHERE id = :id";
+            
+            $stmt = $this->db->prepare($sql);
+            $stmt->bindParam(':id', $id, PDO::PARAM_INT); // Ensure the id is treated as an integer
+            $stmt->execute();
+    
+            // Check if any rows were affected (deleted)
+            if ($stmt->rowCount() > 0) {
+                return true; // Successfully deleted
+            } else {
+                return false; // No rows deleted, id may not exist
+            }
+        } catch(PDOException $e){
+            // Handle exception, perhaps log it
+            return false;
+        }
+    }
+    
+
     
     public function getAll() {
         try {

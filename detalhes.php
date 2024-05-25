@@ -28,6 +28,22 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit;
     }
 }
+
+if($_SERVER['REQUEST_METHOD'] === 'POST') {    
+    if(isset($_POST['delete'])) {
+        if (isset($_POST['id']) && !empty($_POST['id'])) {
+            
+            $contatoDAO->deleteById($_POST['id']);
+        } else {
+            $novoContato = new Contato(null, $_POST['nome'], $_POST['telefone'], $_POST['email']);
+            $contatoDAO->create($novoContato);            
+        }
+
+        header('Location: index.php');
+        exit;
+    }
+}
+
 ?>
 
 <!DOCTYPE html>
