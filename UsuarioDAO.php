@@ -14,7 +14,7 @@ class UsuarioDAO {
     public function create ($usuario)
     {
         try {
-            $sql = "INSERT INTO usurio(nome, senha, email, token)
+            $sql = "INSERT INTO usuario(nome, senha, email, token)
                 VALUES (:nome, :senha, :email, :token)";        
             $stmt = $this->db->prepare($sql);
 
