@@ -61,6 +61,16 @@ if ($type === "register") {
     } else {
         echo "Email ou Senha inválidos!";
     }
+} elseif ($type === "logout"){
+    //limpa todas as variáveis da sessão
+    $_SESSION = array();
+
+    //destruir a seessão
+    session_destroy();
+
+    // redirecionar para a a página login
+    header('Location: auth.php');
+    exit();
 }
 
 ?>
